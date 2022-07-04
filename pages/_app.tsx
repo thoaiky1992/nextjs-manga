@@ -1,8 +1,30 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import type { NextPage } from "next";
+import { LAYOUTS } from "@/constants";
+import AppLayout from "@/components/layouts/app.layout";
+import NextNProgress from "nextjs-progressbar";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export type NextPageWithLayout<P = {}> = NextPage<P> & {
+  layout?: LAYOUTS;
+};
+
+type AppLayoutProps = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppLayoutProps) {
+  switch (Component.layout) {
+    case LAYOUTS.APP:
+      return (
+        <AppLayout>
+          <NextNProgress color="#f43f5e" height={2} />
+          <Component {...pageProps} />
+        </AppLayout>
+      );
+    default:
+      return <Component {...pageProps} />;
+  }
 }
 
-export default MyApp
+export default MyApp;

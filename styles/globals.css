@@ -1,16 +1,61 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.banner:after {
+  background: linear-gradient(0deg, #202125, rgba(32, 33, 37, 0) 50%, #202125);
+  z-index: 2;
+}
+.banner:after,
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.swiper-pagination {
+  padding: 10px 0px;
+  margin: auto;
+  display: flex;
+  gap: 5px;
+}
+.section-swiper {
+  padding-bottom: 50px !important;
+}
+.section-swiper .swiper-pagination-bullet {
+  border-radius: 100%;
+  height: 5px;
+  width: 5px;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  display: block;
+}
+.section-swiper .swiper-pagination-bullet-active {
+  background-color: #f43f5e !important;
+}
+.comic-rank::-webkit-scrollbar {
+  display: none;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+::-webkit-scrollbar {
+  background-color: rgba(31, 31, 31, 1);
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(235, 231, 231);
+  border-radius: 20px;
 }
 
-* {
-  box-sizing: border-box;
+.comic-genres::before {
+  border-bottom: 15px solid rgba(41, 41, 41, 1);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  width: 0;
+  height: 0;
+  top: -12px;
+  left: 20px;
+  position: absolute;
+  content: "";
+  display: block;
 }
