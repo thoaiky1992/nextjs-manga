@@ -1,4 +1,5 @@
 import {
+  GET_COMIC_BY_ASPATH,
   GET_GENRE,
   GET_NEW_COMIC,
   GET_RECCOMMEND_COMIC,
@@ -6,6 +7,7 @@ import {
   GET_TOP_MONTH_COMIC,
   GET_TOP_WEEK_COMIC,
 } from "@/graphql/query";
+import { FilterComicModel } from "@/models/filter-comic.model";
 import { GenreModel } from "@/models/genre.model";
 import { NewComicModel } from "@/models/new-comic.model";
 import { RankComicModel } from "@/models/rank-comic.model";
@@ -19,6 +21,7 @@ interface IComicService {
   getTopWeekComic: () => Promise<Array<RankComicModel>>;
   getTopDayComic: () => Promise<Array<RankComicModel>>;
   getGenre: () => Promise<Array<GenreModel>>;
+  getComicByAsPath: (asPath: string) => Promise<Array<FilterComicModel>>;
 }
 
 export class ComicService implements IComicService {
@@ -58,7 +61,14 @@ export class ComicService implements IComicService {
   public async getTopDayComic() {
     return await this.graphqlCli.request(GET_TOP_DAY_DOMIC);
   }
+
   public async getGenre() {
     return await this.graphqlCli.request(GET_GENRE);
+  }
+
+  public async getComicByAsPath(asPath: string) {
+    return await this.graphqlCli.request(GET_COMIC_BY_ASPATH, {
+      asPath: asPath.split("/")[2],
+    });
   }
 }

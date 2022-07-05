@@ -16,6 +16,8 @@ module.exports = {
     },
     animation: {
       "scale-image-banner": "scale-image-banner 300ms ease-in-out forwards",
+      scale: "scale 300ms ease-in-out forwards",
+      pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
     },
     keyframes: {
       "scale-image-banner": {
@@ -30,6 +32,27 @@ module.exports = {
           transform: "scale(1)",
           filter: "blur(0)",
           "transform-origin": "50% 50%",
+        },
+      },
+      scale: {
+        "0%": {
+          opacity: "0",
+          transform: "scale(0)",
+        },
+        "100%": {
+          opacity: "1",
+          transform: "scale(1)",
+        },
+      },
+      pulse: {
+        "0%": {
+          opacity: "1",
+        },
+        "50%": {
+          opacity: "0.5",
+        },
+        "100%": {
+          opacity: "1",
         },
       },
     },
@@ -47,6 +70,9 @@ module.exports = {
       // => @media (min-width: 1280px) { ... }
 
       "2xl": "1440px",
+      // => @media (min-width: 1536px) { ... }
+
+      "3xl": "1900px",
       // => @media (min-width: 1536px) { ... }
     },
   },

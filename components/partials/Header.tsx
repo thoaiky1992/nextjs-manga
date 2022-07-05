@@ -1,5 +1,7 @@
 import { GenreModel } from "@/models/genre.model";
-import { FC } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { FC, useState } from "react";
 import Logo from "../shared/Logo";
 
 interface HeaderProps {
@@ -7,13 +9,23 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ genres }) => {
+  const router = useRouter();
+  const [hover, setHover] = useState(false);
+  const handleDirect = (slug: string) => {
+    setHover(false);
+    router.push("/genre/" + slug);
+  };
   return (
     <div className="w-screen h-[100px] fixed z-50 bg-app text-white">
       <div className="max-w-screen-xl h-full m-auto">
         <div className="w-full  h-full flex items-center  px-5 lg:px-0">
           <Logo />
           <div className="flex-1 pl-20 flex justify-around items-center gap-10 ">
-            <div className="genre text-xl hidden lg:block relative group">
+            <div
+              className="genre text-xl hidden lg:block relative group"
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+            >
               <span className=" cursor-pointer flex items-center gap-2">
                 Thể loại
                 <svg
@@ -32,12 +44,17 @@ const Header: FC<HeaderProps> = ({ genres }) => {
                   />
                 </svg>
               </span>
-              <div className="absolute top-[100%] left-0 w-[650px] pt-5 scale-0 group-hover:scale-100">
+              <div
+                className={`absolute top-[100%] left-0 w-[650px] pt-5 scale-0 ${
+                  hover ? "scale-100" : "scale-0"
+                }`}
+              >
                 <div className="shadow-xl comic-genres relative shadow-white rounded-lg bg-high-light grid grid-cols-4 gap-5 p-5 opacity-0 group-hover:opacity-100 translate-y-10 group-hover:translate-y-0 transform duration-75 delay-75">
                   {genres.map((genre, index) => {
                     return (
                       <div
                         key={index}
+                        onClick={() => handleDirect(genre.slug)}
                         className="flex justify-center items-center text-sm cursor-pointer hover:bg-primary hover:scale-90 rounded-lg py-3 transition-all ease-in-out duration-200"
                       >
                         {genre.title}

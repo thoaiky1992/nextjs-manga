@@ -76,3 +76,17 @@ export const GET_GENRE = gql`
     }
   }
 `;
+
+export const GET_COMIC_BY_ASPATH = gql`
+  query getComicByAsPath($asPath: String!) {
+    getComicByAsPath(asPath: $asPath) {
+      title
+      chapIndexText
+      chapUpdatedAtText
+      imageSrc
+      slug
+      views
+      likes
+    }
+  }
+`;

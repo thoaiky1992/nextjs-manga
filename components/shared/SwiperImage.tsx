@@ -1,5 +1,6 @@
 import useComicContext from "@/context-api/comic.context";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSwiper } from "swiper/react";
 import { WithComicContext } from "../HOC/withComicContext";
@@ -10,6 +11,7 @@ interface SwiperImageProps {
 }
 
 const SwiperImage = ({ imgSrc, index }: SwiperImageProps) => {
+  const router = useRouter();
   const swiper = useSwiper();
   const { triggerImageBanner, toggleTriggerImageBanner } = useComicContext();
 
