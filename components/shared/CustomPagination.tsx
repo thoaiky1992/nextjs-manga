@@ -15,28 +15,25 @@ export default function CustomPagination({ totalPages }: PaginationProps) {
       router.replace({
         query: { ...router.query, page: String(page) },
       });
+      setCurrentPage(Number(page));
     }, 100);
   };
 
   const handleChangePage = (e: MouseEvent<HTMLLIElement>) => {
-    setCurrentPage(Number(e.currentTarget.dataset.id));
     replacePage(String(e.currentTarget.dataset.id));
   };
 
   const handleInputPage = (page: number) => {
     if (page > totalPages) {
-      setCurrentPage(totalPages);
       replacePage(String(totalPages));
       return;
     }
 
     if (page < 1) {
-      setCurrentPage(1);
       replacePage(String(1));
       return;
     }
 
-    setCurrentPage(page);
     replacePage(String(page));
   };
 
@@ -47,7 +44,7 @@ export default function CustomPagination({ totalPages }: PaginationProps) {
 
   return (
     <div className="absolute-center min-h-[56px] w-full bg-cyan-400/0 flex items-center">
-      <ul className="flex h-full w-full flex-wrap items-center justify-center gap-4 text-3xl text-white">
+      <ul className="flex h-full w-full flex-wrap items-center justify-center lg:gap-4 text-3xl text-white">
         <li
           onClick={handleChangePage}
           data-id={1}
@@ -55,7 +52,7 @@ export default function CustomPagination({ totalPages }: PaginationProps) {
             currentPage === 1
               ? "bg-primary hover:bg-primary/60"
               : "bg-highlight hover:bg-highlight/25"
-          } py-2 px-5 text-lg font-secondary  transition-all hover:cursor-pointer `}
+          } py-1 px-3 lg:py-2 lg:px-5 text-lg font-secondary  transition-all hover:cursor-pointer `}
         >
           1
         </li>
@@ -81,7 +78,7 @@ export default function CustomPagination({ totalPages }: PaginationProps) {
                   number === currentPage
                     ? "bg-primary hover:bg-primary/60"
                     : "bg-highlight hover:bg-highlight/25"
-                } py-2 px-5 text-lg font-secondary  transition-all hover:cursor-pointer hover:bg-highlight/25`}
+                } py-1 px-3 lg:py-2 lg:px-5 text-lg font-secondary  transition-all hover:cursor-pointer hover:bg-highlight/25`}
               >
                 {number}
               </li>
@@ -99,7 +96,7 @@ export default function CustomPagination({ totalPages }: PaginationProps) {
             currentPage === totalPages
               ? "bg-primary hover:bg-primary/60"
               : "bg-highlight hover:bg-highlight/25"
-          } py-2 px-5 text-lg font-secondary  transition-all hover:cursor-pointer hover:bg-highlight/25`}
+          } py-1 px-3 lg:py-2 lg:px-5 text-lg font-secondary  transition-all hover:cursor-pointer hover:bg-highlight/25`}
         >
           {totalPages}
         </li>

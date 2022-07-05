@@ -11,20 +11,10 @@ interface SwiperImageProps {
 }
 
 const SwiperImage = ({ imgSrc, index }: SwiperImageProps) => {
-  const router = useRouter();
-  const swiper = useSwiper();
-  const { triggerImageBanner, toggleTriggerImageBanner } = useComicContext();
-
-  useEffect(() => {
-    swiper.on("slideChange", () => {
-      toggleTriggerImageBanner();
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  const { triggerImageBanner } = useComicContext();
   return (
     <div
-      key={String(triggerImageBanner)}
+      key={triggerImageBanner + String(new Date().getTime())}
       className="aspect-[3/4] relative z-10 flex animate-scale-image-banner h-[80%] justify-center items-center md:w-[200px] lg:w-[250px]"
     >
       <Image

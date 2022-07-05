@@ -4,6 +4,8 @@ import "swiper/css";
 import dynamic from "next/dynamic";
 import { FC, memo } from "react";
 import { ReccommendComicModel } from "@/models/reccommend-comic.model";
+import { WithComicContext } from "../HOC/withComicContext";
+import useComicContext from "@/context-api/comic.context";
 
 const SwiperImage = dynamic(() => import("./SwiperImage"));
 const SwiperButton = dynamic(() => import("./SwiperButton"));
@@ -13,6 +15,8 @@ interface BannerProps {
 }
 
 const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
+  const { toggleTriggerImageBanner } = useComicContext();
+
   return (
     <div className="w-full overflow-hidden relative">
       <Swiper
@@ -20,8 +24,11 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
         modules={[Autoplay]}
         autoplay={{
           delay: 2000,
-          disableOnInteraction: false,
+          // disableOnInteraction: false,
           pauseOnMouseEnter: true,
+        }}
+        onSlideChange={() => {
+          toggleTriggerImageBanner();
         }}
       >
         <div className="hidden lg:flex absolute right-5 bottom-3 flex-col z-50 gap-2">
@@ -86,4 +93,4 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
   );
 };
 
-export default memo(Banner);
+export default memo(WithComicContext(Banner));

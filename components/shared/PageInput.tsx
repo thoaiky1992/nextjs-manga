@@ -27,7 +27,7 @@ function PageInput({ totalPages, setCurrentPage }: PageInputProps) {
       <input
         ref={inputRef}
         autoFocus
-        className="h-10 w-20 rounded-lg border-[1px] border-white bg-transparent p-2 focus:outline-none text-lg"
+        className="h-8 w-12 lg:h-10 lg:w-20 rounded-lg border-[1px] border-white bg-transparent p-2 focus:outline-none text-sm lg:text-lg"
         onKeyUp={handleNavigatePage}
         type={"number"}
         min={1}
