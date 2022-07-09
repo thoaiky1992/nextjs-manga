@@ -29,7 +29,7 @@ const ComicSearchChapterItem: FC<ComicSearchChapterItemProps> = ({
         isPb ? "mb-5" : ""
       }`}
     >
-      <div className="aspect-[3/4] relative z-10 flex animate-scale-image-banner h-full justify-center items-center w-[100px]">
+      <div className="relative z-10 flex animate-scale-image-banner justify-center items-center w-[100px] h-[135px]">
         <Image
           unoptimized
           className="inset-0 object-cover object-center rounded-xl"

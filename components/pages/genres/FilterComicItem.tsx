@@ -54,9 +54,9 @@ const FilterComicItem: React.FC<FilterComicItemProps> = ({ comic }) => {
         </p>
         <div className="absolute bottom-0 left-0 flex h-fit w-[80%] md:w-[50%] items-center px-3">
           <Link href={"/comic-detail/" + comic.slug}>
-            <button className="w-full  text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
-              <a>Chi tiết</a>
-            </button>
+            <a className="w-full text-center text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
+              Chi tiết
+            </a>
           </Link>
         </div>
       </div>

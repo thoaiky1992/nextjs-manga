@@ -6,7 +6,7 @@ import {
 import { GenreModel } from "@/models/genre.model";
 import { ComicService } from "@/services/comic.service";
 import { useRouter } from "next/router";
-import { FC, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import SelectFilterItem, { SelectOptionType } from "./SelectFilterItem";
 
@@ -23,16 +23,6 @@ const SelectFilter = () => {
     return genres;
   });
 
-  if (!data) return <div>loading.....</div>;
-
-  if (data && !options.length) {
-    setOptions(
-      data.map((item: GenreModel) => {
-        return { value: item.slug, label: item.title };
-      })
-    );
-  }
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     for (const key in router.query) {
@@ -43,29 +33,40 @@ const SelectFilter = () => {
         };
       }
     }
-  }, [router.query]);
+
+    if (data && !options.length) {
+      setOptions(
+        data.map((item: GenreModel) => {
+          return { value: item.slug, label: item.title };
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query, data]);
 
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-5 items-center ">
-      <SelectFilterItem
-        options={options}
-        instancdId={"the-loai"}
-        name={"slug"}
-        isClearable={false}
-      />
-      <SelectFilterItem
-        options={SELECT_FILTER_SORT_OPTIONS}
-        instancdId={"sap-xep"}
-        name={"sort"}
-        isClearable={true}
-      />
-      <SelectFilterItem
-        options={SELECT_FILTER_SORT_STATUS}
-        instancdId={"trang-thai"}
-        name={"status"}
-        isClearable={true}
-      />
-    </div>
+    <>
+      <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-5 items-center ">
+        <SelectFilterItem
+          options={options}
+          instancdId={"the-loai"}
+          name={"slug"}
+          isClearable={false}
+        />
+        <SelectFilterItem
+          options={SELECT_FILTER_SORT_OPTIONS}
+          instancdId={"sap-xep"}
+          name={"sort"}
+          isClearable={true}
+        />
+        <SelectFilterItem
+          options={SELECT_FILTER_SORT_STATUS}
+          instancdId={"trang-thai"}
+          name={"status"}
+          isClearable={true}
+        />
+      </div>
+    </>
   );
 };
 

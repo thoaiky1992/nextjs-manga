@@ -15,12 +15,9 @@ const AppLayout = ({ children }: AppLayoutProps) => {
     const genres = await comicService.getGenre();
     return genres;
   });
-
-  if (!data) return <h1>Loading....</h1>;
-
   return (
     <>
-      <Header genres={data} />
+      {data && <Header genres={data} />}
       <main className="w-full pt-[100px]">{children}</main>
       <Footer />
     </>

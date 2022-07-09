@@ -16,8 +16,8 @@ const SectionRankCardItem: React.FC<SectionRankCardItemProps> = ({ comic }) => {
     <div className="w-full rounded-lg flex bg-secondary mb-5 p-2">
       <figure className="relative h-[150px] min-h-[80px] w-[120px] min-w-[120px] overflow-hidden rounded-lg">
         <Image
-          priority={true}
           unoptimized
+          priority={true}
           className="object-cover object-center rounded-lg"
           alt="image-preview"
           layout="fill"
@@ -48,9 +48,9 @@ const SectionRankCardItem: React.FC<SectionRankCardItemProps> = ({ comic }) => {
         </p>
         <div className="absolute bottom-0 left-0 flex h-fit w-[80%] md:w-[50%] items-center px-3">
           <Link href={"/comic-detail/" + comic.slug}>
-            <button className="w-full  text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
-              <a>Chi tiết</a>
-            </button>
+            <a className="w-full text-center text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
+              Chi tiết
+            </a>
           </Link>
         </div>
       </div>

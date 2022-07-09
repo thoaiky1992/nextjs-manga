@@ -1,21 +1,16 @@
-import useComicContext from "@/context-api/comic.context";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useSwiper } from "swiper/react";
-import { WithComicContext } from "../HOC/withComicContext";
 
 interface SwiperImageProps {
   imgSrc: String;
   index?: number;
+  key: String;
 }
 
-const SwiperImage = ({ imgSrc, index }: SwiperImageProps) => {
-  const { triggerImageBanner } = useComicContext();
+const SwiperImage = ({ imgSrc, index, key }: SwiperImageProps) => {
   return (
     <div
-      key={triggerImageBanner + String(new Date().getTime())}
-      className="aspect-[3/4] relative z-10 flex animate-scale-image-banner h-[80%] justify-center items-center md:w-[200px] lg:w-[250px]"
+      key={String(key)}
+      className="relative z-10 flex animate-scale-image-banner h-[80%] justify-center items-center w-[150px] md:w-[200px] lg:w-[250px]"
     >
       <Image
         unoptimized
@@ -28,4 +23,4 @@ const SwiperImage = ({ imgSrc, index }: SwiperImageProps) => {
     </div>
   );
 };
-export default WithComicContext(SwiperImage);
+export default SwiperImage;

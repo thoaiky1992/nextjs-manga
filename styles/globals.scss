@@ -7,6 +7,14 @@
 
 @import "dot-pulse";
 
+html,
+body {
+  background-color: rgba(31, 31, 31, 1);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .banner:after {
   background: linear-gradient(0deg, #202125, rgba(32, 33, 37, 0) 50%, #202125);
   z-index: 2;
@@ -39,6 +47,8 @@
 .section-swiper .swiper-pagination-bullet-active {
   background-color: #f43f5e !important;
 }
+.modal-chapter-list::-webkit-scrollbar,
+.modal-comic-list::-webkit-scrollbar,
 .comic-rank::-webkit-scrollbar {
   display: none;
 }

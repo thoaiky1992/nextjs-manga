@@ -95,9 +95,9 @@ const NewComic: FC<NewComicProps> = ({ newComic }) => {
 
                     <div className="absolute bottom-1 sm:bottom-2 left-0 flex h-fit w-full items-center px-2">
                       <Link href={"/comic-detail/" + item.slug}>
-                        <button className="w-full text-[10px] lg:text-sm items-center justify-center space-x-4 rounded-xl bg-primary py-1 px-3 transition-all hover:scale-[105%]">
-                          <a>Chi tiết</a>
-                        </button>
+                        <a className="w-full text-[10px] text-center lg:text-sm items-center justify-center space-x-4 rounded-xl bg-primary py-1 px-3 transition-all hover:scale-[105%]">
+                          Chi tiết
+                        </a>
                       </Link>
                     </div>
                   </div>

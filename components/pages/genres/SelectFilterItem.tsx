@@ -27,6 +27,7 @@ const SelectFilterItem: FC<SelectFilterItemProps> = ({
     )[0]
   );
   const handleChange = (values: SelectOptionType) => {
+    setDefaultValue(values);
     let query = { ...router.query };
     if (name === "slug") delete query["page"];
     if (values) {
@@ -39,10 +40,21 @@ const SelectFilterItem: FC<SelectFilterItemProps> = ({
     });
   };
 
+  useEffect(() => {
+    if (options.length) {
+      setDefaultValue(
+        options.filter(
+          (item: SelectOptionType) => item.value === router.query[name]
+        )[0]
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options]);
+
   return (
     <Select
       key={instancdId}
-      defaultValue={defaultValue}
+      value={defaultValue}
       isMulti={false}
       placeholder={"Thể loại"}
       isClearable={isClearable}

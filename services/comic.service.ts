@@ -78,9 +78,11 @@ export class ComicService implements IComicService {
   }
 
   public async getComicByAsPath(asPath: string) {
-    return await this.graphqlCli.request(GET_COMIC_BY_ASPATH, {
-      asPath: asPath.split("/")[2],
-    });
+    return (
+      await this.graphqlCli.request(GET_COMIC_BY_ASPATH, {
+        asPath: asPath.split("/")[2],
+      })
+    ).getComicByAsPath;
   }
 
   public async getComicDetailBySlug(slug: String) {

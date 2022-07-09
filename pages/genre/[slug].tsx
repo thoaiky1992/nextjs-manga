@@ -1,49 +1,39 @@
 import { LAYOUTS } from "@/constants";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { NextPageWithLayout } from "../_app";
-import SelectFilter from "@/components/shared/SelectFilter";
+import SelectFilter from "@/components/pages/genres/SelectFilter";
 import CustomHead from "@/components/shared/CustomHead";
 import ClientOnly from "@/components/shared/ClientOnly";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import FilterComicList from "@/components/shared/FilterComicList";
+import FilterComicList from "@/components/pages/genres/FilterComicList";
 import { ComicService } from "@/services/comic.service";
 import CustomPagination from "@/components/shared/CustomPagination";
 import { GenreModel } from "@/models/genre.model";
 import useSWR from "swr";
+import { FilterComicModel } from "@/models/filter-comic.model";
 
 interface GenrePageProps {
   slug: string;
 }
 
 const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
-  const [comics, setComics] = useState([]);
-  const [totalPage, setTotalPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const { data } = useSWR<GenreModel[]>("getGenres", async () => {
+  const { data: genres } = useSWR<GenreModel[]>("getGenres", async () => {
     const comicService = ComicService.getInstance();
-    const genres = await comicService.getGenre();
-    return genres;
+    const data = await comicService.getGenre();
+    return data;
   });
 
-  if (!data) return <div>loading....</div>;
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    const fetchData = async () => {
-      setComics([]);
-      setIsLoading(true);
-      const comicService = ComicService.getInstance();
-      const data = (await comicService.getComicByAsPath(router.asPath))
-        .getComicByAsPath;
-      setComics(data.comics);
-      setTotalPage(data.totalPage);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, [router.query]);
+  const { data: comics } = useSWR<{
+    comics: FilterComicModel[];
+    totalPage: number;
+  }>(router.asPath, async () => {
+    const comicService = ComicService.getInstance();
+    const data = await comicService.getComicByAsPath(router.asPath);
+    return data;
+  });
 
   return (
     <div className="w-full">
@@ -52,11 +42,15 @@ const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
         <div className="w-full bg-app px-3 lg:px-20">
           <h1 className="text-2xl text-white py-5">
             Thể loại :{" "}
-            {data.filter((item: GenreModel) => item.slug === slug)[0].title}
+            {genres &&
+              genres.length &&
+              genres.filter((item: GenreModel) => item.slug === slug)[0]?.title}
           </h1>
           <SelectFilter />
-          <FilterComicList comics={comics} isLoading={isLoading} />
-          {totalPage > 1 && <CustomPagination totalPages={totalPage} />}
+          <FilterComicList comics={comics?.comics} />
+          {comics?.totalPage && comics?.totalPage > 1 && (
+            <CustomPagination totalPages={comics?.totalPage} />
+          )}
         </div>
       </ClientOnly>
     </div>

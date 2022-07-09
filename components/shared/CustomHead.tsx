@@ -9,16 +9,19 @@ interface HeadProps {
 }
 
 export default function CustomHead({
-  title = "Manga",
+  title = "KySomaio Manga",
   description = "Website đọc truyện tranh miễn phí!",
-  image = WEBSITE_URL + "/iamges/banner.png",
+  image = WEBSITE_URL + "images/banner.png",
 }: HeadProps) {
   const { asPath } = useRouter();
 
   return (
     <NextHead>
       <title>{title}</title>
-      <link rel="manifest" href="/manifest.json" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      />
 
       <meta name="title" content={title} />
       <meta name="description" content={description} />
@@ -37,8 +40,8 @@ export default function CustomHead({
 
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="application-name" content="Manga" />
-      <meta name="apple-mobile-web-app-title" content="Manga" />
+      <meta name="application-name" content="KySomaio Manga" />
+      <meta name="apple-mobile-web-app-title" content="KySomaio Manga" />
       <meta name="theme-color" content="#f43f5e" />
       <meta name="msapplication-navbutton-color" content="#f43f5e" />
       <meta

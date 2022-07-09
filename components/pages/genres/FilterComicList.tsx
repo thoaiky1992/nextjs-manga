@@ -1,24 +1,25 @@
 import { FilterComicModel } from "@/models/filter-comic.model";
+import { EmojiSadIcon } from "@heroicons/react/outline";
 import { FC } from "react";
 import FilterComicItem from "./FilterComicItem";
 import FilterComicSkeleton from "./FilterComicSkeleton";
 
 interface FilterComicListProps {
-  comics: FilterComicModel[];
-  isLoading: boolean;
+  comics?: FilterComicModel[] | undefined;
 }
 
-const FilterComicList: FC<FilterComicListProps> = ({ comics, isLoading }) => {
-  if (isLoading)
+const FilterComicList: FC<FilterComicListProps> = ({ comics }) => {
+  if (!comics)
     return (
       <div className="py-10 lg:py-20 bg-app grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 text-white gap-5">
         <FilterComicSkeleton />
       </div>
     );
-  if (!comics.length)
+  if (!comics?.length)
     return (
-      <div className="w-full text-center text-xl py-10 lg:py-20 text-whitn">
-        Dữ liệu bạn cần chưa có
+      <div className="w-full text-center text-xl py-10 lg:py-20 text-white flex items-center justify-center">
+        <span className="mr-2">Dữ liệu bạn cần chưa có</span>{" "}
+        <EmojiSadIcon className="w-6 h-6" />
       </div>
     );
   return (

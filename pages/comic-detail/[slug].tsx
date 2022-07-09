@@ -1,5 +1,5 @@
-import { ChapterList } from "@/components/shared/ChapterList";
-import ComicDetailInfo from "@/components/shared/ComicDetailInfo";
+import { ChapterList } from "@/components/pages/detail/ChapterList";
+import ComicDetailInfo from "@/components/pages/detail/ComicDetailInfo";
 import CustomHead from "@/components/shared/CustomHead";
 import { LAYOUTS } from "@/constants";
 import { ComicDetailModel } from "@/models/comic-detail.model";
@@ -33,9 +33,10 @@ export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const comicService = ComicService.getInstance();
-  const comic = await comicService.getComicDetailBySlug(
+  const comic: ComicDetailModel = await comicService.getComicDetailBySlug(
     context.query.slug as String
   );
+  if (!comic.title) return { notFound: true };
   return {
     props: {
       comic,

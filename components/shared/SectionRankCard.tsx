@@ -18,9 +18,9 @@ const SectionRankCard: FC<SectionRankCardProps> = ({ title, comics }) => {
         {comics.map((comic, index) => {
           return <SectionRankCardItem key={index} comic={comic} />;
         })}
-        <div className="w-full">
+        {/* <div className="w-full">
           <span className="cursor-pointer">Xem thêm ...</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

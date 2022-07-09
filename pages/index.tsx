@@ -1,10 +1,10 @@
 import ClientOnly from "@/components/shared/ClientOnly";
 import { ComicService } from "@/services/comic.service";
 import { ReccommendComicModel } from "@/models/reccommend-comic.model";
-import NewComic from "@/components/shared/NewComic";
+import NewComic from "@/components/pages/home/NewComic";
 import { NewComicModel } from "@/models/new-comic.model";
 import { RankComicModel } from "@/models/rank-comic.model";
-import RankComic from "@/components/shared/RankComic";
+import RankComic from "@/components/pages/home/RankComic";
 import { NextPageWithLayout } from "./_app";
 import { HOME_REVALIDATE_EXPIRE, LAYOUTS } from "@/constants";
 import Banner from "@/components/shared/Banner";

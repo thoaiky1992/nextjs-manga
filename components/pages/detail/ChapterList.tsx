@@ -38,15 +38,15 @@ export const ChapterList: FC<ChapterListProps> = ({ chapters }) => {
               return (
                 <Link
                   key={index}
-                  href={"/read/" + chapter.href.split("truyen-tranh")[1]}
+                  href={"/read" + chapter.href.split("truyen-tranh")[1]}
                 >
-                  <div className=" bg-app py-5 px-5 rounded-md flex flex-col max-h-[100px] hover:bg-primary transition-all cursor-pointer ease-in-out">
+                  <a className=" bg-app py-5 px-5 rounded-md flex flex-col max-h-[100px] hover:bg-primary transition-all cursor-pointer ease-in-out">
                     <div className="w-full">{chapter.chapterIndexText}</div>
                     <div className="w-full flex items-center justify-between mt-2">
                       <span className="text-sm">{chapter.updatedAtText}</span>
                       <BookOpenIcon className="w-4 h-4" />
                     </div>
-                  </div>
+                  </a>
                 </Link>
               );
             })}

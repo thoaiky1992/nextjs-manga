@@ -102,12 +102,12 @@ const ModalSearchComic = () => {
         </div>
       </div>
       <div
-        className={`w-screen h-screen fixed bg-transparent left-0 top-0 flex items-center justify-center text-white px-3 ${
+        className={`w-screen h-screen fixed bg-transparent left-0 top-0 flex pt-20 justify-center text-white ${
           open ? "" : "hidden"
         }`}
       >
         <div className="absolute bg-secondary opacity-90 w-full h-full top-0 left-0 z-40"></div>
-        <div className="bg-app w-[90%] lg:w-[800px] lg:max-w-[800px] animate-scale absolute z-50 rounded-lg pt-5 pb-10 px-3 lg:px-5 mx-3">
+        <div className="bg-app w-[90%] lg:w-[800px] animate-scale absolute z-50 rounded-lg pt-5 pb-10 px-3 lg:px-5">
           <div className="w-full flex items-start justify-between">
             <span className="text-xl">Tìm truyện</span>
             <XIcon
@@ -115,17 +115,17 @@ const ModalSearchComic = () => {
               onClick={handleClose}
             />
           </div>
-          <div className="w-full relative mt-5 pr-4">
+          <div className="w-full relative mt-5">
             <SearchIcon className="w-5 h-5 absolute top-1/2 -translate-y-1/2 left-3" />
             <input
               ref={inputSearchRref}
               type="text"
-              className="bg-secondary py-2 px-12 rounded-lg !w-full lg:w-auto text-[10px] lg:text-sm mr-2 cursor-pointer focus:ring-1 focus:ring-primary focus:outline-none"
+              className="bg-secondary py-3 px-10 rounded-lg !w-full lg:w-auto text-sm mr-2 cursor-pointer focus:ring-1 focus:ring-primary focus:outline-none"
               onChange={handleChange}
               value={keySearch}
             />
             <XIcon
-              className="w-4 h-4 cursor-pointer absolute top-1/2 -translate-y-1/2 right-7"
+              className="w-4 h-4 cursor-pointer absolute top-1/2 -translate-y-1/2 right-3"
               onClick={handleClearKeySearch}
             />
           </div>
@@ -136,7 +136,7 @@ const ModalSearchComic = () => {
           )}
 
           {!loading && chapters.length > 0 && (
-            <div className="w-full pr-2 mt-5 max-h-[400px] overflow-y-scroll">
+            <div className="w-full mt-5 max-h-[400px] overflow-y-scroll modal-comic-list rounded-lg">
               {chapters.map((chapter, index) => {
                 return (
                   <ComicSearchChapterItem

@@ -3,12 +3,12 @@ import Link from "next/link";
 import { FC } from "react";
 import Image from "next/image";
 import {
-  ClipboardListIcon,
   ClockIcon,
   EyeIcon,
   LightningBoltIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import Error404Page from "@/pages/404";
 
 interface ComicDetailInfoProps {
   comic: ComicDetailModel;
@@ -26,7 +26,7 @@ export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic }) => {
         ></figure>
         <div className="absolute flex left-0 top-0 w-full h-full  px-3 lg:px-20">
           <div className="md:w-[200px] mr-2 lg:mr-10 lg:w-[250px] flex justify-center items-center h-full">
-            <div className="aspect-[3/4] relative z-10 flex animate-scale-image-banner h-[80%] justify-center items-center md:w-[200px] lg:w-[250px]">
+            <div className="relative z-10 flex animate-scale-image-banner h-[80%] justify-center items-center w-[150px] md:w-[200px] lg:w-[250px]">
               <Image
                 unoptimized
                 className="inset-0 object-cover object-center rounded-xl"
@@ -64,28 +64,28 @@ export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic }) => {
                   {comic.views}
                 </span>
               </div>
-              <div className="flex items-center gap-1 md:gap-5 absolute bottom-0 left-0">
+              <div className="flex items-center absolute bottom-0 left-0">
                 <Link
                   href={
-                    "/read/" +
-                    comic.chapters[comic.chapters.length - 1].href.split(
+                    "/read" +
+                    comic.chapters[comic.chapters.length - 1]?.href.split(
                       "truyen-tranh"
                     )[1]
                   }
                 >
-                  <div className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer">
+                  <a className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer mr-2">
                     Đọc ngay
-                  </div>
+                  </a>
                 </Link>
                 <Link
                   href={
-                    "/read/" + comic.chapters[0].href.split("truyen-tranh")[1]
+                    "/read" + comic.chapters[0]?.href.split("truyen-tranh")[1]
                   }
                 >
-                  <div className="rounded-lg bg-white text-app py-2 px-4 text-[9px] md:text-sm cursor-pointer flex items-center justify-between">
+                  <a className="rounded-lg bg-white text-app py-2 px-4 text-[9px] md:text-sm cursor-pointer flex items-center justify-between">
                     <LightningBoltIcon className="w-3 h-3 lg:w-5 lg:h-5 text-primary mr-2" />
                     <span>Chap mới nhất</span>
-                  </div>
+                  </a>
                 </Link>
               </div>
             </div>

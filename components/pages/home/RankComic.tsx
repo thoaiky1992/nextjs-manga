@@ -1,6 +1,6 @@
 import { RankComicModel } from "@/models/rank-comic.model";
 import { FC } from "react";
-import SectionRankCard from "./SectionRankCard";
+import SectionRankCard from "../../shared/SectionRankCard";
 
 interface RankComicProps {
   topMonthComic: Array<RankComicModel>;

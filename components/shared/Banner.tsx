@@ -16,7 +16,7 @@ interface BannerProps {
 }
 
 const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
-  const { toggleTriggerImageBanner } = useComicContext();
+  const { setTriggerImageBanner, triggerImageBanner } = useComicContext();
 
   return (
     <div className="w-full overflow-hidden relative">
@@ -29,7 +29,7 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
           pauseOnMouseEnter: true,
         }}
         onSlideChange={() => {
-          toggleTriggerImageBanner();
+          setTriggerImageBanner(() => String(Math.random()));
         }}
       >
         <div className="hidden lg:flex absolute right-5 bottom-3 flex-col z-50 gap-2">
@@ -55,7 +55,7 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
                     <div className="text-md lg:text-2xl line-clamp-2">
                       {item.title}
                     </div>
-                    <div className="line-clamp-3 text-[10px] lg:text-sm">
+                    <div className="line-clamp-4 lg:line-clamp-none text-[10px] lg:text-sm">
                       {`Manga (tiếng Nhật: Kanji: 漫画, Hiragana: まんが,
                       Katakana: マンガ, Hán-Việt: Mạn họa) là một cụm từ trong
                       tiếng Nhật để chỉ các loại truyện tranh và tranh biếm họa.
@@ -66,21 +66,25 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
                       Nhật Bản, Manga được coi là môn nghệ thuật đặc trưng, là
                       "quốc hồn quốc túy" của người dân xứ sở mặt trời mọc.`}
                     </div>
-                    <div className="flex items-center gap-1 md:gap-5 mt-10">
+                    <div className="flex items-center mt-10">
                       <Link href={"/comic-detail/" + item.slug}>
-                        <div className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer">
+                        <a className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer mr-2">
                           Đọc ngay
-                        </div>
+                        </a>
                       </Link>
                       <Link href={"/comic-detail/" + item.slug}>
-                        <div className="rounded-lg bg-white text-app py-2 px-5 text-[9px] md:text-sm cursor-pointer">
+                        <a className="rounded-lg bg-white text-app py-2 px-5 text-[9px] md:text-sm cursor-pointer">
                           Chi tiết
-                        </div>
+                        </a>
                       </Link>
                     </div>
                   </div>
                   <div className="flex-1 md:w-[40%] flex justify-center items-center h-full px-5 lg:px-0">
-                    <SwiperImage imgSrc={item.imageSrc} index={index} />
+                    <SwiperImage
+                      imgSrc={item.imageSrc}
+                      index={index}
+                      key={String(triggerImageBanner)}
+                    />
                   </div>
                 </div>
               </SwiperSlide>
