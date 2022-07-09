@@ -1,8 +1,11 @@
 export enum LAYOUTS {
   APP = "APP",
 }
-export const HOME_REVALIDATE_EXPIRE = 60 * 60;
+export const NT = "http://www.nettruyenco.com";
 export const WEBSITE_URL = "http://localhost:3000/";
+
+export const HOME_REVALIDATE_EXPIRE = 60 * 60;
+
 export const SELECT_FILTER_SORT_OPTIONS = [
   { value: "15", label: "Truyện mới" },
   { value: "11", label: "Top Tháng" },
@@ -17,3 +20,7 @@ export const SELECT_FILTER_SORT_STATUS = [
 ];
 
 export const FILTER_OPTIONS = ["slug", "sort", "status"];
+
+export const RANK_TOP_MONTH_QUERY = "?status=-1&sort=11";
+export const RANK_TOP_WEEK_QUERY = "?status=-1&sort=12";
+export const RANK_TOP_DAY_QUERY = "?status=-1&sort=13";

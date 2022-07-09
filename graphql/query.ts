@@ -80,13 +80,66 @@ export const GET_GENRE = gql`
 export const GET_COMIC_BY_ASPATH = gql`
   query getComicByAsPath($asPath: String!) {
     getComicByAsPath(asPath: $asPath) {
+      comics {
+        title
+        chapIndexText
+        chapUpdatedAtText
+        imageSrc
+        slug
+        views
+        likes
+      }
+      totalPage
+    }
+  }
+`;
+
+export const GET_COMIC_DETAIL_BY_SLUG = gql`
+  query getComicDetailBySlug($slug: String!) {
+    getComicDetailBySlug(slug: $slug) {
       title
-      chapIndexText
-      chapUpdatedAtText
       imageSrc
-      slug
+      author
+      status
+      views
+      description
+      chapters {
+        href
+        chapterIndexText
+        updatedAtText
+      }
+    }
+  }
+`;
+
+export const READ_COMIC = gql`
+  query readComic($slug: String!) {
+    readComic(slug: $slug) {
+      previousChapterHref
+      currentChapterIndexText
+      currentChapterIndex
+      currentChapterHref
+      nextChapterHref
+      imageSrcList
+      chapters {
+        chapterIndexText
+        href
+        updatedAtText
+      }
+    }
+  }
+`;
+
+export const SEARCH_COMIC = gql`
+  query searchComic($keySearch: String!) {
+    searchComic(keySearch: $keySearch) {
+      title
       views
       likes
+      chapterIndexText
+      updatedAtText
+      imgSrc
+      slug
     }
   }
 `;

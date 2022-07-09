@@ -18,11 +18,13 @@ interface GenrePageProps {
 
 const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
   const [comics, setComics] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const { data } = useSWR<GenreModel[]>("getGenres", async () => {
     const comicService = ComicService.getInstance();
-    const genres = (await comicService.getGenre()).getGenre;
+    const genres = await comicService.getGenre();
     return genres;
   });
 
@@ -32,10 +34,13 @@ const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
   useEffect(() => {
     const fetchData = async () => {
       setComics([]);
+      setIsLoading(true);
       const comicService = ComicService.getInstance();
       const data = (await comicService.getComicByAsPath(router.asPath))
         .getComicByAsPath;
-      setComics(data);
+      setComics(data.comics);
+      setTotalPage(data.totalPage);
+      setIsLoading(false);
     };
     fetchData();
   }, [router.query]);
@@ -50,8 +55,8 @@ const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
             {data.filter((item: GenreModel) => item.slug === slug)[0].title}
           </h1>
           <SelectFilter />
-          <FilterComicList comics={comics} />
-          <CustomPagination totalPages={10} />
+          <FilterComicList comics={comics} isLoading={isLoading} />
+          {totalPage > 1 && <CustomPagination totalPages={totalPage} />}
         </div>
       </ClientOnly>
     </div>

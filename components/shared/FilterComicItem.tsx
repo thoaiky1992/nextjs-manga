@@ -6,6 +6,7 @@ import {
   HeartIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 interface FilterComicItemProps {
@@ -17,7 +18,7 @@ const FilterComicItem: React.FC<FilterComicItemProps> = ({ comic }) => {
   return (
     <div
       key={String(asPath)}
-      className="w-full rounded-lg flex bg-dark mb-5 p-5 animate-scale"
+      className="w-full rounded-lg flex bg-dark mb-1 lg:mb-5 p-5 animate-scale"
     >
       <figure className="relative h-[200px] min-h-[100px] w-[150px] min-w-[120px] overflow-hidden rounded-lg">
         <Image
@@ -52,9 +53,11 @@ const FilterComicItem: React.FC<FilterComicItemProps> = ({ comic }) => {
           <span className="ml-2 text-[90%]">{comic.likes}</span>
         </p>
         <div className="absolute bottom-0 left-0 flex h-fit w-[80%] md:w-[50%] items-center px-3">
-          <button className="w-full  text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
-            <a>Chi tiết</a>
-          </button>
+          <Link href={"/comic-detail/" + comic.slug}>
+            <button className="w-full  text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
+              <a>Chi tiết</a>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -54,11 +54,11 @@ export const getStaticProps: GetStaticProps = async () => {
     getTopWeekComic,
     getTopDayComic,
   ] = await Promise.all([
-    (await commicService.getRecommendedComic()).getRecommendedComic,
-    (await commicService.getNewComic()).getNewComic,
-    (await commicService.getTopMonthComic()).getTopMonthComic,
-    (await commicService.getTopWeekComic()).getTopWeekComic,
-    (await commicService.getTopDayComic()).getTopDayComic,
+    await commicService.getRecommendedComic(),
+    await commicService.getNewComic(),
+    await commicService.getTopMonthComic(),
+    await commicService.getTopWeekComic(),
+    await commicService.getTopDayComic(),
   ]);
 
   return {

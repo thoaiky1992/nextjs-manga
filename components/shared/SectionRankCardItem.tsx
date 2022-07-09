@@ -6,6 +6,7 @@ import {
   HeartIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SectionRankCardItemProps {
   comic: RankComicModel;
@@ -46,9 +47,11 @@ const SectionRankCardItem: React.FC<SectionRankCardItemProps> = ({ comic }) => {
           <span className="ml-2 text-[90%]">{comic.likes}</span>
         </p>
         <div className="absolute bottom-0 left-0 flex h-fit w-[80%] md:w-[50%] items-center px-3">
-          <button className="w-full  text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
-            <a>Chi tiết</a>
-          </button>
+          <Link href={"/comic-detail/" + comic.slug}>
+            <button className="w-full  text-sm items-center justify-center space-x-4 rounded-lg bg-primary py-1 px-3 transition-all hover:scale-[105%]">
+              <a>Chi tiết</a>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

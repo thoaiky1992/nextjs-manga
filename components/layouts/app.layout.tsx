@@ -12,7 +12,7 @@ interface AppLayoutProps {
 const AppLayout = ({ children }: AppLayoutProps) => {
   const { data } = useSWR<GenreModel[]>("getGenres", async () => {
     const comicService = ComicService.getInstance();
-    const genres = (await comicService.getGenre()).getGenre;
+    const genres = await comicService.getGenre();
     return genres;
   });
 

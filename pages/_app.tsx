@@ -1,4 +1,5 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
+import "../styles/magic.min.css";
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import { LAYOUTS } from "@/constants";
@@ -18,12 +19,16 @@ function MyApp({ Component, pageProps }: AppLayoutProps) {
     case LAYOUTS.APP:
       return (
         <AppLayout>
-          <NextNProgress color="#f43f5e" height={2} />
           <Component {...pageProps} />
         </AppLayout>
       );
     default:
-      return <Component {...pageProps} />;
+      return (
+        <>
+          <NextNProgress color="#f43f5e" height={2} />
+          <Component {...pageProps} />
+        </>
+      );
   }
 }
 

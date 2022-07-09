@@ -6,6 +6,7 @@ import {
   EyeIcon,
   HeartIcon,
 } from "@heroicons/react/outline";
+import Link from "next/link";
 import { FC } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -93,9 +94,11 @@ const NewComic: FC<NewComicProps> = ({ newComic }) => {
                     </p>
 
                     <div className="absolute bottom-1 sm:bottom-2 left-0 flex h-fit w-full items-center px-2">
-                      <button className="w-full text-[10px] lg:text-sm items-center justify-center space-x-4 rounded-xl bg-primary py-1 px-3 transition-all hover:scale-[105%]">
-                        <a>Chi tiết</a>
-                      </button>
+                      <Link href={"/comic-detail/" + item.slug}>
+                        <button className="w-full text-[10px] lg:text-sm items-center justify-center space-x-4 rounded-xl bg-primary py-1 px-3 transition-all hover:scale-[105%]">
+                          <a>Chi tiết</a>
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -6,6 +6,7 @@ import { FC, memo } from "react";
 import { ReccommendComicModel } from "@/models/reccommend-comic.model";
 import { WithComicContext } from "../HOC/withComicContext";
 import useComicContext from "@/context-api/comic.context";
+import Link from "next/link";
 
 const SwiperImage = dynamic(() => import("./SwiperImage"));
 const SwiperButton = dynamic(() => import("./SwiperButton"));
@@ -55,29 +56,27 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
                       {item.title}
                     </div>
                     <div className="line-clamp-3 text-[10px] lg:text-sm">
-                      Một Manga thể loại siêu anh hùng với đặc trưng phồng tôm
-                      đấm phát chết luôn... và mang đậm tính chất troll của tác
-                      giả.Onepunch-man là câu chuyện của 1 chàng thanh niên 23
-                      tuổi, đang là một nhân viên văn phòng điển trai nghiêm túc
-                      và tất nhiên là ế. Không hiểu vì biến cố gì mà tự nhiên
-                      lông tóc trên người của anh trụi lủi, sau đó anh mang
-                      trong mình khả năng siêu đặc biệt Đấm phát chết luôn nhằm
-                      bảo vệ trái đất và thành phố nơi anh sinh sống khỏi các
-                      sinh vật ngoài không gian (nhưng phá hoại cũng không kém).
+                      {`Manga (tiếng Nhật: Kanji: 漫画, Hiragana: まんが,
+                      Katakana: マンガ, Hán-Việt: Mạn họa) là một cụm từ trong
+                      tiếng Nhật để chỉ các loại truyện tranh và tranh biếm họa.
+                      Manga được coi như một danh từ để gọi chung cho truyện
+                      tranh Nhật Bản và cũng là cách để phân biệt với truyện
+                      tranh của các quốc gia khác như: Manhua (Trung Quốc),
+                      Manhwa (Hàn Quốc), Comics (các nước phương Tây)... Tại
+                      Nhật Bản, Manga được coi là môn nghệ thuật đặc trưng, là
+                      "quốc hồn quốc túy" của người dân xứ sở mặt trời mọc.`}
                     </div>
                     <div className="flex items-center gap-1 md:gap-5 mt-10">
-                      <a
-                        href=""
-                        className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm"
-                      >
-                        Đọc ngay
-                      </a>
-                      <a
-                        href=""
-                        className="rounded-lg bg-white text-app py-2 px-5 text-[9px] md:text-sm"
-                      >
-                        Chi tiết
-                      </a>
+                      <Link href={"/comic-detail/" + item.slug}>
+                        <div className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer">
+                          Đọc ngay
+                        </div>
+                      </Link>
+                      <Link href={"/comic-detail/" + item.slug}>
+                        <div className="rounded-lg bg-white text-app py-2 px-5 text-[9px] md:text-sm cursor-pointer">
+                          Chi tiết
+                        </div>
+                      </Link>
                     </div>
                   </div>
                   <div className="flex-1 md:w-[40%] flex justify-center items-center h-full px-5 lg:px-0">
