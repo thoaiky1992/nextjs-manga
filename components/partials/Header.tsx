@@ -6,12 +6,9 @@ import Logo from "@/public/logo.png";
 import ModalSearchComic from "../shared/ModalSearchComic";
 import Image from "next/image";
 import DrawerMobile from "../shared/DrawerMobile";
+import { GENRE_LIST } from "@/constants";
 
-interface HeaderProps {
-  genres: GenreModel[];
-}
-
-const Header: FC<HeaderProps> = ({ genres }) => {
+const Header = () => {
   const router = useRouter();
   const [hover, setHover] = useState(false);
   const handleDirect = (slug: string) => {
@@ -23,7 +20,7 @@ const Header: FC<HeaderProps> = ({ genres }) => {
       <div className="max-w-screen-xl h-full m-auto">
         <div className="w-full h-full flex items-center px-3 lg:px-0">
           <div className="lg:hidden">
-            <DrawerMobile genres={genres} />
+            <DrawerMobile genres={GENRE_LIST} />
           </div>
           <div className="w-[100px] lg:w-auto">
             <Link href="/">
@@ -63,7 +60,7 @@ const Header: FC<HeaderProps> = ({ genres }) => {
                 }`}
               >
                 <div className="shadow-xl comic-genres relative shadow-white rounded-lg bg-high-light grid grid-cols-4 gap-5 p-5 opacity-0 group-hover:opacity-100 translate-y-10 group-hover:translate-y-0 transform duration-75 delay-75">
-                  {genres.map((genre, index) => {
+                  {GENRE_LIST.map((genre, index) => {
                     return (
                       <div
                         key={index}
