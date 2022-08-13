@@ -75,7 +75,15 @@ const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
           {readComic.imageSrcList.map((src: string, index: number) => {
             return (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={index} src={"/api/read-image?src=" + src} alt="" />
+              <img
+                key={index}
+                src={
+                  process.env.NEXT_PUBLIC_BACKEND_URI +
+                  "/api-v2/proxy?src=" +
+                  src
+                }
+                alt=""
+              />
             );
           })}
         </div>
