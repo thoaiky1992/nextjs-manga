@@ -1,5 +1,6 @@
 import {
   FILTER_OPTIONS,
+  GET_GENRES_KEY,
   SELECT_FILTER_SORT_OPTIONS,
   SELECT_FILTER_SORT_STATUS,
 } from "@/constants";
@@ -17,7 +18,7 @@ const SelectFilter = () => {
 
   const router = useRouter();
 
-  const { data } = useSWR<GenreModel[]>("getGenres", async () => {
+  const { data } = useSWR<GenreModel[]>(GET_GENRES_KEY, async () => {
     const comicService = ComicService.getInstance();
     const genres = await comicService.getGenre();
     return genres;

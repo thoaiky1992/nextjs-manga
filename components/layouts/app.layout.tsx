@@ -1,3 +1,4 @@
+import { GET_GENRES_KEY } from "@/constants";
 import { GenreModel } from "@/models/genre.model";
 import { ComicService } from "@/services/comic.service";
 import { ReactNode } from "react";
@@ -10,7 +11,7 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-  const { data } = useSWR<GenreModel[]>("getGenres", async () => {
+  const { data } = useSWR<GenreModel[]>(GET_GENRES_KEY, async () => {
     const comicService = ComicService.getInstance();
     const genres = await comicService.getGenre();
     return genres;

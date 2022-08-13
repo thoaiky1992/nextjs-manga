@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 export interface ComicContextType {
-  triggerImageBanner: String;
-  setTriggerImageBanner: Function;
+  flag: boolean;
+  setFlag: Function;
 }
 interface ComicContextProps {
   children: ReactNode;
@@ -10,10 +10,10 @@ interface ComicContextProps {
 const ComicContext = createContext<ComicContextType | null>(null);
 
 export const ComicContextProvider = ({ children }: ComicContextProps) => {
-  const [triggerImageBanner, setTriggerImageBanner] = useState<String>("");
+  const [flag, setFlag] = useState<boolean>(false);
   const value = {
-    triggerImageBanner,
-    setTriggerImageBanner,
+    flag,
+    setFlag,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>

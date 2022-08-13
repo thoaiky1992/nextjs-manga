@@ -1,5 +1,6 @@
 import "../styles/globals.scss";
 import "../styles/magic.min.css";
+import "swiper/css";
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import { LAYOUTS } from "@/constants";

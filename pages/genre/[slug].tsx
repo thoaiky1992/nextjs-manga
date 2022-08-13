@@ -1,11 +1,10 @@
-import { LAYOUTS } from "@/constants";
+import { GET_GENRES_KEY, LAYOUTS } from "@/constants";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { NextPageWithLayout } from "../_app";
 import SelectFilter from "@/components/pages/genres/SelectFilter";
 import CustomHead from "@/components/shared/CustomHead";
 import ClientOnly from "@/components/shared/ClientOnly";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import FilterComicList from "@/components/pages/genres/FilterComicList";
 import { ComicService } from "@/services/comic.service";
 import CustomPagination from "@/components/shared/CustomPagination";
@@ -20,7 +19,7 @@ interface GenrePageProps {
 const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
   const router = useRouter();
 
-  const { data: genres } = useSWR<GenreModel[]>("getGenres", async () => {
+  const { data: genres } = useSWR<GenreModel[]>(GET_GENRES_KEY, async () => {
     const comicService = ComicService.getInstance();
     const data = await comicService.getGenre();
     return data;

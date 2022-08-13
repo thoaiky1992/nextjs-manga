@@ -1,7 +1,7 @@
 export enum LAYOUTS {
   APP = "APP",
 }
-export const NT = "https://www.nettruyenco.com";
+export const NT = "http://www.nettruyenme.com";
 export const WEBSITE_URL = "https://manga.thoaiky.com/";
 
 export const HOME_REVALIDATE_EXPIRE = 60 * 60;
@@ -24,3 +24,5 @@ export const FILTER_OPTIONS = ["slug", "sort", "status"];
 export const RANK_TOP_MONTH_QUERY = "?status=-1&sort=11";
 export const RANK_TOP_WEEK_QUERY = "?status=-1&sort=12";
 export const RANK_TOP_DAY_QUERY = "?status=-1&sort=13";
+
+export const GET_GENRES_KEY = "GET_GENRES_KEY";

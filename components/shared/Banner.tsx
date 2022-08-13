@@ -1,11 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
-import "swiper/css";
+
 import dynamic from "next/dynamic";
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import { ReccommendComicModel } from "@/models/reccommend-comic.model";
-import { WithComicContext } from "../HOC/withComicContext";
-import useComicContext from "@/context-api/comic.context";
 import Link from "next/link";
 
 const SwiperImage = dynamic(() => import("./SwiperImage"));
@@ -16,7 +14,7 @@ interface BannerProps {
 }
 
 const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
-  const { setTriggerImageBanner, triggerImageBanner } = useComicContext();
+  const [triggerImage, setTriggerImage] = useState<boolean>(false);
 
   return (
     <div className="w-full overflow-hidden relative">
@@ -29,7 +27,7 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
           pauseOnMouseEnter: true,
         }}
         onSlideChange={() => {
-          setTriggerImageBanner(() => String(Math.random()));
+          setTriggerImage((preValue) => !preValue);
         }}
       >
         <div className="hidden lg:flex absolute right-5 bottom-3 flex-col z-50 gap-2">
@@ -83,7 +81,7 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
                     <SwiperImage
                       imgSrc={item.imageSrc}
                       index={index}
-                      key={String(triggerImageBanner)}
+                      key={String(triggerImage)}
                     />
                   </div>
                 </div>
@@ -96,4 +94,4 @@ const Banner: FC<BannerProps> = ({ getRecommendedComic }) => {
   );
 };
 
-export default memo(WithComicContext(Banner));
+export default memo(Banner);
