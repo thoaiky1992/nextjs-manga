@@ -28,11 +28,19 @@ const ModalFilterChapter: FC<ModalFilterChapterProps> = ({
   useEffect(() => {
     setTimeout(() => {
       document
-        .querySelector(`.modal-chapter-list a[data-id="${currentChapterHref}"]`)
+        .querySelector(
+          `.modal-chapter-list a[data-id="${handleConvertURL(
+            currentChapterHref
+          )}"]`
+        )
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 200);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapters, open]);
+
+  const handleConvertURL = (url: string) => {
+    return url.replace(/^http:\/\//i, "https://").replace("com//", "com/");
+  };
 
   return (
     <>
@@ -79,10 +87,15 @@ const ModalFilterChapter: FC<ModalFilterChapterProps> = ({
                   >
                     <a
                       onClick={handleClose}
-                      data-id={chapter.href}
+                      data-id={handleConvertURL(chapter.href)}
                       className={`
-                    flex w-full rounded-lg my-2 bg-secondary px-4 py-5 items-center justify-between cursor-pointer
-                    ${chapter.href === currentChapterHref ? "bg-primary" : ""}
+                    flex w-full rounded-lg my-2  px-4 py-5 items-center justify-between cursor-pointer
+                    ${
+                      handleConvertURL(chapter.href) ===
+                      handleConvertURL(currentChapterHref)
+                        ? "bg-primary"
+                        : "bg-secondary"
+                    }
                   `}
                     >
                       <div className="flex items-center">
