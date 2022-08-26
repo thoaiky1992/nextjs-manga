@@ -1,6 +1,6 @@
 import {
   FILTER_OPTIONS,
-  GET_GENRES_KEY,
+  GENRE_LIST,
   SELECT_FILTER_SORT_OPTIONS,
   SELECT_FILTER_SORT_STATUS,
 } from "@/constants";
@@ -18,12 +18,6 @@ const SelectFilter = () => {
 
   const router = useRouter();
 
-  const { data } = useSWR<GenreModel[]>(GET_GENRES_KEY, async () => {
-    const comicService = ComicService.getInstance();
-    const genres = await comicService.getGenre();
-    return genres;
-  });
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     for (const key in router.query) {
@@ -35,15 +29,15 @@ const SelectFilter = () => {
       }
     }
 
-    if (data && !options.length) {
+    if (!options.length) {
       setOptions(
-        data.map((item: GenreModel) => {
+        GENRE_LIST.map((item: GenreModel) => {
           return { value: item.slug, label: item.title };
         })
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.query, data]);
+  }, [router.query]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { GET_GENRES_KEY, LAYOUTS } from "@/constants";
+import { GENRE_LIST, LAYOUTS } from "@/constants";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { NextPageWithLayout } from "../_app";
 import SelectFilter from "@/components/pages/genres/SelectFilter";
@@ -19,12 +19,6 @@ interface GenrePageProps {
 const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
   const router = useRouter();
 
-  const { data: genres } = useSWR<GenreModel[]>(GET_GENRES_KEY, async () => {
-    const comicService = ComicService.getInstance();
-    const data = await comicService.getGenre();
-    return data;
-  });
-
   const { data: comics } = useSWR<{
     comics: FilterComicModel[];
     totalPage: number;
@@ -41,9 +35,10 @@ const GenrePage: NextPageWithLayout<GenrePageProps> = ({ slug }) => {
         <div className="w-full bg-app px-3 lg:px-20">
           <h1 className="text-2xl text-white py-5">
             Thể loại :{" "}
-            {genres &&
-              genres.length &&
-              genres.filter((item: GenreModel) => item.slug === slug)[0]?.title}
+            {
+              GENRE_LIST.filter((item: GenreModel) => item.slug === slug)[0]
+                ?.title
+            }
           </h1>
           <SelectFilter />
           <FilterComicList comics={comics?.comics} />
