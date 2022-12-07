@@ -6,7 +6,7 @@ import { NewComicModel } from "@/models/new-comic.model";
 import { RankComicModel } from "@/models/rank-comic.model";
 import RankComic from "@/components/pages/home/RankComic";
 import { NextPageWithLayout } from "./_app";
-import { HOME_REVALIDATE_EXPIRE, LAYOUTS } from "@/constants";
+import { LAYOUTS } from "@/constants";
 import Banner from "@/components/shared/Banner";
 import { GetStaticProps } from "next";
 import CustomHead from "@/components/shared/CustomHead";
@@ -68,8 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
       getTopMonthComic,
       getTopWeekComic,
       getTopDayComic,
-    },
-    revalidate: HOME_REVALIDATE_EXPIRE,
+    }
   };
 };
 

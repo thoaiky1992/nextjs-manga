@@ -19,9 +19,12 @@ function MyApp({ Component, pageProps }: AppLayoutProps) {
   switch (Component.layout) {
     case LAYOUTS.APP:
       return (
-        <AppLayout>
-          <Component {...pageProps} />
-        </AppLayout>
+        <>
+          <NextNProgress color="#f43f5e" height={2} />
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        </>
       );
     default:
       return (

@@ -20,31 +20,7 @@ const Footer: FC = () => {
           tôi chỉ liên kết tới những phương tiện truyền thông được lưu trữ bên
           dịch vụ thứ 3.
         </h5>
-        <div className="w-full grid grid-cols-1 lg:grid-cols-3">
-          <h5 className="text-sm lg:text-md text-center mt-5">
-            Lấy cảm hứng từ:{" "}
-            <a
-              href="https://www.facebook.com/leephan2001"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="hover:text-primary cursor-pointer transition-all ease-in-out">
-                Lee Phan
-              </span>
-            </a>
-          </h5>
-          <h5 className="text-sm lg:text-md text-center mt-5">
-            Nguồn truyện:{" "}
-            <a
-              href="http://www.nettruyenco.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="hover:text-primary cursor-pointer transition-all ease-in-out">
-                Nettruyen
-              </span>
-            </a>
-          </h5>
+        <div className="w-full">
           <h5 className="text-sm lg:text-md text-center mt-5 mb-20">
             Thực hiện bởi:{" "}
             <a href="https://cv.thoaiky.com" target="_blank" rel="noreferrer">
