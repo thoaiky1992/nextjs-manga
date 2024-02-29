@@ -16,6 +16,13 @@ interface ComicDetailInfoProps {
 }
 
 export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic, slug }) => {
+  const renderHref = (flag: "oldest" | "latest") => {
+    const index = flag === "oldest" ? 0 : comic.chapters.length - 1;
+    const chapter = comic.chapters[index];
+    const path = chapter?.href.split("truyen-tranh")[1];
+    return "/read" + path + "?dn=" + slug.split("-").at(-1);
+  };
+
   return (
     <div className="w-full">
       <div className="w-full relative overflow-hidden text-white bg-app">
@@ -66,28 +73,12 @@ export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic, slug }) => {
                 </span>
               </div>
               <div className="flex items-center absolute bottom-0 left-0">
-                <Link
-                  href={
-                    "/read" +
-                    comic.chapters[comic.chapters.length - 1]?.href.split(
-                      "truyen-tranh"
-                    )[1] +
-                    "?detailSlug=" +
-                    slug
-                  }
-                >
+                <Link href={renderHref("oldest")}>
                   <a className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer mr-2">
                     Đọc ngay
                   </a>
                 </Link>
-                <Link
-                  href={
-                    "/read" +
-                    comic.chapters[0]?.href.split("truyen-tranh")[1] +
-                    "?detailSlug=" +
-                    slug
-                  }
-                >
+                <Link href={renderHref("latest")}>
                   <a className="rounded-lg bg-white text-app py-2 px-4 text-[9px] md:text-sm cursor-pointer flex items-center justify-between">
                     <LightningBoltIcon className="w-3 h-3 lg:w-5 lg:h-5 text-primary mr-2" />
                     <span>Chap mới nhất</span>

@@ -5,11 +5,16 @@ import { ChangeEvent, FC, useState } from "react";
 
 interface ChapterListProps {
   chapters: ComicDetailChapterModel[];
-  slug: string
+  slug: string;
 }
 
 export const ChapterList: FC<ChapterListProps> = ({ chapters, slug }) => {
   const [searchChapter, setSearchChapter] = useState("");
+  const renderHref = (index: number) => {
+    const chapter = chapters[index];
+    const path = chapter?.href.split("truyen-tranh")[1];
+    return "/read" + path + "?dn=" + slug.split("-").at(-1);
+  };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const search = e.currentTarget.value;
@@ -39,7 +44,7 @@ export const ChapterList: FC<ChapterListProps> = ({ chapters, slug }) => {
               return (
                 <Link
                   key={index}
-                  href={"/read" + chapter.href.split("truyen-tranh")[1] + '?detailSlug=' + slug}
+                  href={renderHref(index)}
                 >
                   <a className=" bg-app py-5 px-5 rounded-md flex flex-col max-h-[100px] hover:bg-primary transition-all cursor-pointer ease-in-out">
                     <div className="w-full">{chapter.chapterIndexText}</div>

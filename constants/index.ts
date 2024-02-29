@@ -1,7 +1,7 @@
 export enum LAYOUTS {
   APP = "APP",
 }
-export const NT = "https://www.nettruyenme.com";
+export const URL_NT = "https://www.nettruyenbb.com";
 export const WEBSITE_URL = "https://manga.thoaiky.com/";
 
 export const HOME_REVALIDATE_EXPIRE = 60 * 60;
