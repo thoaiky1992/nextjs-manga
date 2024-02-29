@@ -29,7 +29,7 @@ interface IComicService {
   getGenre: () => Promise<Array<GenreModel>>;
   getComicByAsPath: (asPath: string) => Promise<Array<FilterComicModel>>;
   getComicDetailBySlug: (slug: string) => Promise<ComicDetailModel>;
-  readComic: (slug: string) => Promise<ReadComicModel>;
+  readComic: (chapterSlug: string, detailSlug: string) => Promise<ReadComicModel>;
   searchComic: (keySearch: string) => Promise<SearchComicModel[]>;
 }
 
@@ -90,8 +90,8 @@ export class ComicService implements IComicService {
       .getComicDetailBySlug;
   }
 
-  public async readComic(slug: String) {
-    return (await this.graphqlCli.request(READ_COMIC, { slug })).readComic;
+  public async readComic(chapterSlug: String, detailSlug: string) {
+    return (await this.graphqlCli.request(READ_COMIC, { chapterSlug, detailSlug })).readComic;
   }
 
   public async searchComic(keySearch: string): Promise<SearchComicModel[]> {

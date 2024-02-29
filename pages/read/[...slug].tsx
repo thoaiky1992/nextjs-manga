@@ -15,11 +15,13 @@ import { NextPageWithLayout } from "../_app";
 interface ReadComicPageProps {
   readComic: ReadComicModel;
   slug: string;
+  detailSlug: string
 }
 
 const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
   readComic,
   slug,
+  detailSlug
 }) => {
   const SafeLink = ({ children, href, slug }: any) => {
     if (slug === "") return <span>{children}</span>;
@@ -51,7 +53,7 @@ const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
             <SafeLink
               slug={readComic.previousChapterHref}
               href={
-                "/read" + readComic.previousChapterHref.split("truyen-tranh")[1]
+                "/read" + readComic.previousChapterHref.split("truyen-tranh")[1] + "?detailSlug=" + detailSlug
               }
             >
               <div className="p-2 bg-secondary rounded-lg mr-2 hover:bg-primary cursor-pointer transition-all ease-in-out hover:scale-90">
@@ -61,7 +63,7 @@ const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
             <SafeLink
               slug={readComic.nextChapterHref}
               href={
-                "/read" + readComic.nextChapterHref.split("truyen-tranh")[1]
+                "/read" + readComic.nextChapterHref.split("truyen-tranh")[1] + "?detailSlug=" + detailSlug
               }
             >
               <div className="p-2 bg-secondary rounded-lg hover:bg-primary cursor-pointer transition-all ease-in-out hover:scale-90">
@@ -91,7 +93,7 @@ const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
           {readComic.previousChapterHref && (
             <Link
               href={
-                "/read" + readComic.previousChapterHref.split("truyen-tranh")[1]
+                "/read" + readComic.previousChapterHref.split("truyen-tranh")[1] + "?detailSlug=" + detailSlug
               }
             >
               <a className="flex items-center bg-secondary py-2 px-4 mr-2 rounded-lg hover:bg-primary hover:scale-90 cursor-pointer transition-all ease-in-out">
@@ -103,7 +105,7 @@ const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
           {readComic.nextChapterHref && (
             <Link
               href={
-                "/read" + readComic.nextChapterHref.split("truyen-tranh")[1]
+                "/read" + readComic.nextChapterHref.split("truyen-tranh")[1]+ "?detailSlug=" + detailSlug
               }
             >
               <a className="flex items-center bg-secondary py-2 px-4 rounded-lg hover:bg-primary hover:scale-90 cursor-pointer transition-all ease-in-out">
@@ -121,10 +123,13 @@ const ReadComicPage: NextPageWithLayout<ReadComicPageProps> = ({
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const slug = context.query.slug as String[];
+  const slug = context.query.slug as string[];
+  const detailSlug = (context.query?.detailSlug as string) || "";
   const comicService = ComicService.getInstance();
+  const chapterSlug = slug[0] + "/" + slug[1] + "/" + slug[2];
   const readComic: ReadComicModel = await comicService.readComic(
-    slug[0] + "/" + slug[1] + "/" + slug[2]
+    chapterSlug,
+    detailSlug
   );
 
   if (!readComic.currentChapterIndexText) return { notFound: true };
@@ -133,6 +138,7 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       slug: slug[0],
       readComic,
+      detailSlug
     },
   };
 };

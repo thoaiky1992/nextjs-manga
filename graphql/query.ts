@@ -113,8 +113,8 @@ export const GET_COMIC_DETAIL_BY_SLUG = gql`
 `;
 
 export const READ_COMIC = gql`
-  query readComic($slug: String!) {
-    readComic(slug: $slug) {
+  query readComic($chapterSlug: String!, $detailSlug: String!) {
+    readComic(chapterSlug: $chapterSlug, detailSlug: $detailSlug) {
       previousChapterHref
       currentChapterIndexText
       currentChapterIndex

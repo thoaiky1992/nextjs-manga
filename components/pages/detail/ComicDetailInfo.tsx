@@ -12,9 +12,10 @@ import Error404Page from "@/pages/404";
 
 interface ComicDetailInfoProps {
   comic: ComicDetailModel;
+  slug: string;
 }
 
-export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic }) => {
+export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic, slug }) => {
   return (
     <div className="w-full">
       <div className="w-full relative overflow-hidden text-white bg-app">
@@ -70,7 +71,9 @@ export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic }) => {
                     "/read" +
                     comic.chapters[comic.chapters.length - 1]?.href.split(
                       "truyen-tranh"
-                    )[1]
+                    )[1] +
+                    "?detailSlug=" +
+                    slug
                   }
                 >
                   <a className="rounded-lg bg-primary py-2 px-5 text-[9px] md:text-sm cursor-pointer mr-2">
@@ -79,7 +82,10 @@ export const ComicDetailInfo: FC<ComicDetailInfoProps> = ({ comic }) => {
                 </Link>
                 <Link
                   href={
-                    "/read" + comic.chapters[0]?.href.split("truyen-tranh")[1]
+                    "/read" +
+                    comic.chapters[0]?.href.split("truyen-tranh")[1] +
+                    "?detailSlug=" +
+                    slug
                   }
                 >
                   <a className="rounded-lg bg-white text-app py-2 px-4 text-[9px] md:text-sm cursor-pointer flex items-center justify-between">
